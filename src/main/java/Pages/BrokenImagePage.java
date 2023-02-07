@@ -1,0 +1,31 @@
+package Pages;
+
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.WebElement;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
+public class BrokenImagePage {
+
+    public ElementsCollection images () {
+        return $$(".example img");
+    }
+
+    /**
+     * Метод проверяющий длинну изображения. Если 0 то изображение не отображается.
+     * @param image
+     */
+    public void isImageBroken(SelenideElement image)
+    {
+        if (image.getAttribute("naturalWidth").equals("0"))
+        {
+            System.out.println(image.getAttribute("outerHTML") + " is broken.");
+        } else {
+            System.out.println(image.getAttribute("outerHTML") + " is normal.");
+        }
+    }
+
+
+}
