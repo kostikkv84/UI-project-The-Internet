@@ -219,6 +219,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dynamicLoadOneTest() throws InterruptedException {
+        setUp("win_firefox");
         Configuration.timeout = 10000;
         open("http://the-internet.herokuapp.com/dynamic_loading/1");
         DynamicLoadPage dynamicPage = new DynamicLoadPage();
@@ -232,6 +233,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void closeModalTest(){
+        setUp("win_firefox");
         open("http://the-internet.herokuapp.com/entry_ad");
         EntryADPage adPage = new EntryADPage();
         adPage.modalClose();
