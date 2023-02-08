@@ -21,6 +21,8 @@ public class Tests extends BaseTest{
         mainPage.availableExamples().shouldHave(CollectionCondition.size(44));
     }
 
+
+
     /**
      * Проверка перехода на страницу по линку
      */
