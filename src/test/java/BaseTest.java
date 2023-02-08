@@ -19,7 +19,7 @@ public class BaseTest {
     public void setUp(String PLATFORM_AND_BROWSER) {
         switch (PLATFORM_AND_BROWSER) {
             case "win_chrome":
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().driverVersion("81.0.4044.138").setup();
                 Configuration.browser = "chrome";
                 break;
             case "win_firefox":
