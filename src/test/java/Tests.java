@@ -16,19 +16,17 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkAvailableExamples(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.availableExamples().shouldHave(CollectionCondition.size(44));
     }
-
-
 
     /**
      * Проверка перехода на страницу по линку
      */
     @Test
     public void checkLinkABTestControl () {
-        setUp("win_chrome");
+        setUp("win_firefox");
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.abTestingLinkOpen().text().shouldHave(Condition.text("Also known as split testing. "));
     }
@@ -68,7 +66,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void brokenImage(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.brokenImageLinkOpen();
         BrokenImagePage brokenImages = new BrokenImagePage();
@@ -83,7 +81,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void challengingDom(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         new MainPage(BASE_URL).challengingDOMPageLinkOpen()
                 .bazClick().quxClick().fooClick().baz().shouldBe(visible);
     }
@@ -94,7 +92,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkboxesTest() {
-        setUp("win_chrome");
+        setUp("win_firefox");
         new MainPage(BASE_URL).checkboxesPageLinkOpen();
         CheckboxesPage checkboxesPage = new CheckboxesPage();
         checkboxesPage.checkboxesClick();
@@ -126,7 +124,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void disapElementTest(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.disappearingElem();
         DisapElemPage disapElempage = new DisapElemPage();
@@ -142,7 +140,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dragNDropTest(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         new MainPage(BASE_URL).dragNDropLinkOpen()
                 .dragNDropActions()
                 .elemHeader()
@@ -154,7 +152,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dropDownMenuTest(){
-        setUp("win_chrome");
+        setUp("win_firefox");
         DropDownPage dropDown = new DropDownPage(DROPDOWN_URL);
         dropDown.dropDownHeader().shouldBe(visible);
         dropDown.selectOption(dropDown.option1());
@@ -166,6 +164,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void changeContentTest(){
+        setUp("win_firefox");
         open("http://the-internet.herokuapp.com/dynamic_content");
         DynamicContentPage dynamicContent = new DynamicContentPage();
         String image = dynamicContent.divImage().getAttribute("src");
@@ -173,7 +172,7 @@ public class Tests extends BaseTest{
         dynamicContent.changeContent().click(); // нажимаем сменить контент
         Assert.assertNotEquals(dynamicContent.divImage().getAttribute("src"),image);
         Assert.assertNotEquals(dynamicContent.divText().getText(),getText);
-        sleep(5000);
+        sleep(1000);
     }
 
     /**
@@ -183,6 +182,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dynamicControlsDelAddText(){
+        setUp("win_firefox");
         open("http://the-internet.herokuapp.com/dynamic_controls");
         DynamicControlPage dynamicPage = new DynamicControlPage();
         dynamicPage.checkbox().shouldBe(visible);
@@ -198,6 +198,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void enabledDisabledTest(){
+        setUp("win_firefox");
         open("http://the-internet.herokuapp.com/dynamic_controls");
         DynamicControlPage dynamic = new DynamicControlPage();
         dynamic.input().shouldHave(attribute("disabled"));

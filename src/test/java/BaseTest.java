@@ -18,13 +18,14 @@ public class BaseTest {
 
     public void setUp(String PLATFORM_AND_BROWSER) {
         switch (PLATFORM_AND_BROWSER) {
-            case "win_chrome":
-                WebDriverManager.chromedriver().driverVersion("81.0.4044.138").setup();
-                Configuration.browser = "chrome";
-                break;
             case "win_firefox":
                 WebDriverManager.firefoxdriver().setup();
                 Configuration.browser = "firefox";
+                break;
+            case "win_chrome":
+                System.setProperty("webdriver.chrome.driver", "/");
+                WebDriverManager.chromedriver().setup();
+                Configuration.browser = "chrome";
                 break;
             default:
                 Assert.isTrue(false, "Incorrect platform");
