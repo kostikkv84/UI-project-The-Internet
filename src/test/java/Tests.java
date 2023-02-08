@@ -1,14 +1,10 @@
 import Pages.*;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import javax.swing.*;
-
 import static Constants.Constant.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -49,7 +45,6 @@ public class Tests extends BaseTest{
         addRemoveElements.deleteButton().shouldNotBe(visible); // кнопки удалить нет
         for(int i=0; i<=3;i++){
             addRemoveElements.addButton().shouldBe(visible).click();        }
-
         addRemoveElements.deleteButtons().shouldBe(CollectionCondition.size(4));
         addRemoveElements.deleteButton().shouldBe(visible).click();
         addRemoveElements.deleteButtons().shouldBe(CollectionCondition.size(3));
@@ -168,7 +163,7 @@ public class Tests extends BaseTest{
     }
 
     @Test
-    public void changeContent(){
+    public void changeContentTest(){
         open("http://the-internet.herokuapp.com/dynamic_content");
         DynamicContentPage dynamicContent = new DynamicContentPage();
         String image = dynamicContent.divImage().getAttribute("src");
@@ -176,7 +171,70 @@ public class Tests extends BaseTest{
         dynamicContent.changeContent().click(); // нажимаем сменить контент
         Assert.assertNotEquals(dynamicContent.divImage().getAttribute("src"),image);
         Assert.assertNotEquals(dynamicContent.divText().getText(),getText);
+        sleep(5000);
     }
 
+    /**
+     * Кнопка удаляет чекбокс, проверяет удаление
+     * Кнопка меняется и добавляет новый чекбокс
+     * Проверяется создание нового чекбокса
+     */
+    @Test
+    public void dynamicControlsDelAddText(){
+        open("http://the-internet.herokuapp.com/dynamic_controls");
+        DynamicControlPage dynamicPage = new DynamicControlPage();
+        dynamicPage.checkbox().shouldBe(visible);
+        dynamicPage.removeButtonClick().checkbox().shouldNotBe(visible); // с ожиданием
+        dynamicPage.addButtonClick().inputCheckbox().shouldBe(visible);
+        dynamicPage.inputCheckbox().shouldBe(visible);
+    }
+
+    /**
+     * Нажимаем кнопку Enabled, разблокируется Input, вписываем текст
+     * Проверяем, что кнопка изменилась Enabled -> Disabled
+     * Нажимаем Disabled. кнопка меняется и Input добавляется атрибут "disabled"
+     */
+    @Test
+    public void enabledDisabledTest(){
+        open("http://the-internet.herokuapp.com/dynamic_controls");
+        DynamicControlPage dynamic = new DynamicControlPage();
+        dynamic.input().shouldHave(attribute("disabled"));
+        dynamic.enabledBtn().shouldBe(visible).click();
+        dynamic.input().shouldNotHave(attribute("disabled")).setValue("text123");
+        dynamic.enabledBtn().shouldNotBe(visible);
+        dynamic.disabledBtn().shouldBe(visible).click();
+        dynamic.input().shouldHave(attribute("disabled"));
+        dynamic.disabledBtn().shouldNotBe(visible);
+        sleep(5000);
+    }
+
+    /**
+     * Стартуем по кнопке, кнопка исчезает.
+     * Дожидаемся завершения Loadingbar
+     * Проверяем появление сообщения об успехе - "Hello World!"
+     * @throws InterruptedException
+     */
+    @Test
+    public void dynamicLoadOneTest() throws InterruptedException {
+        Configuration.timeout = 10000;
+        open("http://the-internet.herokuapp.com/dynamic_loading/1");
+        DynamicLoadPage dynamicPage = new DynamicLoadPage();
+        dynamicPage.startButton().shouldBe(visible).click();
+        dynamicPage.loading().shouldBe(visible);
+        dynamicPage.loading().should(disappear);
+        dynamicPage.finish().shouldBe(visible);
+        dynamicPage.loading().shouldNotBe(visible);
+        dynamicPage.startButton().shouldNotBe(visible);
+    }
+
+    @Test
+    public void closeModalTest(){
+        open("http://the-internet.herokuapp.com/entry_ad");
+        EntryADPage adPage = new EntryADPage();
+        adPage.modalClose();
+        adPage.modalWindow().shouldNotBe(visible);
+
+        sleep(3000);
+    }
 
 }
