@@ -23,8 +23,8 @@ public class BaseTest {
                 Configuration.browser = "firefox";
                 break;
             case "win_chrome":
-                System.setProperty("webdriver.chrome.driver", "/");
-                WebDriverManager.chromedriver().setup();
+                System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+              //  WebDriverManager.chromedriver().setup();
                 Configuration.browser = "chrome";
                 break;
             default:

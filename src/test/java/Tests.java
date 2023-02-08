@@ -16,7 +16,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkAvailableExamples(){
-        setUp("win_firefox");
+        setUp("win_chrome");
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.availableExamples().shouldHave(CollectionCondition.size(44));
     }
