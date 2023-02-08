@@ -37,7 +37,6 @@ public class BaseTest {
     }
 
 
-
     @AfterTest
     public void tearDown() {
         Selenide.closeWebDriver();
