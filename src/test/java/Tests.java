@@ -294,12 +294,40 @@ public class Tests extends BaseTest{
         File downloadedFile = DownloadPage.txtFile.download(10000);
     }
 
+    /**
+     * Upload file Test
+     */
     @Test
     public void fileUploadTest(){
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/upload");
-
+        UploadFilePage.uploadInput.uploadFile(new File("uploadFile.jpg"));
+        UploadFilePage.button.click();
+        UploadFilePage.uploadedMessage.shouldBe(visible).shouldHave(text("File Uploaded!"));
     }
 
+    /**
+     * Для примера. Удаление аттрибута Class(через JS) и проверка, что аттрибут удален.
+     */
+    @Test
+    public void removeClassFromButton(){
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/upload");
+        SCRIPTS_JS.removeClass();
+        $("#file-submit").shouldNotHave(attribute("class", "button"));
+    }
+
+    /**
+     * Скрол вниз страницы до футера, проверка, что закрепленное меню не ушло за экран после скрола.
+     */
+    @Test
+    public void floatingMenuTest(){
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/floating_menu#contact");
+        actions().scrollToElement(FloatingMenuPage.footer).build();
+        FloatingMenuPage.footer.shouldBe(visible);
+        $("#menu").shouldBe(visible);
+
+    }
 
 }
