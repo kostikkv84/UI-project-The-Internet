@@ -11,7 +11,6 @@ public class BasicAuthPage {
         Selenide.open("http://admin:admin@the-internet.herokuapp.com/basic_auth");
     }
 
-    public SelenideElement congratulations(){
-        return $(".example p");
-    }
+    public SelenideElement congratulations = $(".example p");
+
 }

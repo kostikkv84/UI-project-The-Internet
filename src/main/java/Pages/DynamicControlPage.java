@@ -20,19 +20,11 @@ public class DynamicControlPage {
         return $x("//input[@id=\"checkbox\"]");
     }
 
-    public SelenideElement enabledBtn(){
-        return $x("//button[text()=\"Enable\"]");
-    }
+    public static SelenideElement enabledBtn = $x("//button[text()=\"Enable\"]");
 
-    public SelenideElement disabledBtn(){
-        return $x("//button[text()=\"Disable\"]");
-    }
-    public SelenideElement input(){
-        return $x("//form[@id=\"input-example\"]/input");
-    }
+    public static SelenideElement disabledBtn = $x("//button[text()=\"Disable\"]");
 
-
-
+    public static SelenideElement input = $x("//form[@id=\"input-example\"]/input");
 
     public DynamicControlPage addButtonClick(){
         buttonAdd().shouldBe(Condition.visible).click();

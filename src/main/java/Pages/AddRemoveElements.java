@@ -15,15 +15,10 @@ public class AddRemoveElements {
         $x("//h3[text()=\"Add/Remove Elements\"]").shouldBe(exist);
     }
 
-    public SelenideElement addButton (){
-       return $x("//div[@class=\"example\"]//button");
-    }
+    public SelenideElement addButton = $x("//div[@class=\"example\"]//button");
 
-    public SelenideElement deleteButton (){
-       return $x("//button[@class=\"added-manually\"]");
-    }
+    public SelenideElement deleteButton = $x("//button[@class=\"added-manually\"]");
 
-    public ElementsCollection deleteButtons (){
-        return $$x("//div[@id=\"elements\"]//button");
-    }
+    public ElementsCollection deleteButtons = $$x("//div[@id=\"elements\"]//button");
+
 }

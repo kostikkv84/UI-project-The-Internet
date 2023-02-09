@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class DisapElemPage {
 
-    public SelenideElement homeBtn(){
-        return $x("//a[text()=\"Home\"]");
-    }
+    public SelenideElement homeBtn = $x("//a[text()=\"Home\"]");
+
 }

@@ -7,9 +7,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class EntryADPage {
 
-    public SelenideElement modalWindow(){
-        return $x("//div[@class=\"modal\"]");
-    }
+    public SelenideElement modalWindow = $x("//div[@class=\"modal\"]");
 
     public void modalClose(){
         $x("//div[@class=\"modal-footer\"]/p").shouldBe(Condition.visible).click();

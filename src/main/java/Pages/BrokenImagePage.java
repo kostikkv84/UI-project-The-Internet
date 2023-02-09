@@ -9,9 +9,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class BrokenImagePage {
 
-    public ElementsCollection images () {
-        return $$(".example img");
-    }
+    public ElementsCollection images = $$(".example img");
+
 
     /**
      * Метод проверяющий длинну изображения. Если 0 то изображение не отображается.

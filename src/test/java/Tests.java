@@ -27,8 +27,8 @@ public class Tests extends BaseTest{
     @Test
     public void checkLinkABTestControl () {
         setUp("win_firefox");
-        MainPage mainPage = new MainPage(BASE_URL);
-        mainPage.abTestingLinkOpen().text().shouldHave(Condition.text("Also known as split testing. "));
+        new MainPage(BASE_URL).abTestingLinkOpen()
+                .text.shouldHave(Condition.text("Also known as split testing. "));
     }
 
     /**
@@ -42,12 +42,12 @@ public class Tests extends BaseTest{
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.addRemoveLinkOpen();
         AddRemoveElements addRemoveElements = new AddRemoveElements();
-        addRemoveElements.deleteButton().shouldNotBe(visible); // кнопки удалить нет
+        addRemoveElements.deleteButton.shouldNotBe(visible); // кнопки удалить нет
         for(int i=0; i<=3;i++){
-            addRemoveElements.addButton().shouldBe(visible).click();        }
-        addRemoveElements.deleteButtons().shouldBe(CollectionCondition.size(4));
-        addRemoveElements.deleteButton().shouldBe(visible).click();
-        addRemoveElements.deleteButtons().shouldBe(CollectionCondition.size(3));
+            addRemoveElements.addButton.shouldBe(visible).click();        }
+             addRemoveElements.deleteButtons.shouldBe(CollectionCondition.size(4));
+            addRemoveElements.deleteButton.shouldBe(visible).click();
+            addRemoveElements.deleteButtons.shouldBe(CollectionCondition.size(3));
     }
 
     /**
@@ -57,7 +57,7 @@ public class Tests extends BaseTest{
     public void baseAuth(){
         setUp("win_firefox");
         MainPage mainPage = new MainPage(BASE_URL);
-        mainPage.authPageLinkOpen().congratulations().shouldHave(Condition.text("Congratulations!"));
+        mainPage.authPageLinkOpen().congratulations.shouldHave(Condition.text("Congratulations!"));
     }
 
     /**
@@ -70,20 +70,33 @@ public class Tests extends BaseTest{
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.brokenImageLinkOpen();
         BrokenImagePage brokenImages = new BrokenImagePage();
-        for (SelenideElement image : brokenImages.images()) {
+        for (SelenideElement image : brokenImages.images) {
             brokenImages.isImageBroken(image);
         }
     }
 
     /**
-     * Привязка к селекторам которые не меняются и манипуляции с ними.
+     * Нажимаем на кнопки по индексу в коллекции, id кнопок меняются.
+     */
+    @Test
+    public void challengingDomExample1(){
+        setUp("win_firefox");
+        new MainPage(BASE_URL).challengingDOMPageLinkOpen();
+        for(int i=0; i<ChallengingDOMPage.buttons.size();i++){
+            ChallengingDOMPage.buttons.get(i).click();
+        }
+    }
+    /**
+     * Привязка к селекторам по Class.
      * id кнопок меняются.
      */
     @Test
-    public void challengingDom(){
+    public void challengingDomExample2(){
         setUp("win_firefox");
-        new MainPage(BASE_URL).challengingDOMPageLinkOpen()
-                .bazClick().quxClick().fooClick().baz().shouldBe(visible);
+        new MainPage(BASE_URL).challengingDOMPageLinkOpen();
+        ChallengingDOMPage.bazClick.shouldBe(visible).click();
+        ChallengingDOMPage.fooClick.shouldBe(visible).click();
+        ChallengingDOMPage.quxClick.shouldBe(visible).click();
     }
 
     /**
@@ -96,8 +109,8 @@ public class Tests extends BaseTest{
         new MainPage(BASE_URL).checkboxesPageLinkOpen();
         CheckboxesPage checkboxesPage = new CheckboxesPage();
         checkboxesPage.checkboxesClick();
-        checkboxesPage.checkbox1().shouldBe(checked);
-        checkboxesPage.checkbox2().shouldNotBe(checked);
+        checkboxesPage.checkbox1.shouldBe(checked);
+        checkboxesPage.checkbox2.shouldNotBe(checked);
         sleep(5000);
 
 
@@ -128,11 +141,9 @@ public class Tests extends BaseTest{
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.disappearingElem();
         DisapElemPage disapElempage = new DisapElemPage();
-        disapElempage.homeBtn().shouldBe(visible).click();
+        disapElempage.homeBtn.shouldBe(visible).click();
         sleep(5000);
-        disapElempage.homeBtn().shouldNotBe(visible);
-
-
+        disapElempage.homeBtn.shouldNotBe(visible);
     }
 
     /**
@@ -200,15 +211,14 @@ public class Tests extends BaseTest{
     public void enabledDisabledTest(){
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/dynamic_controls");
-        DynamicControlPage dynamic = new DynamicControlPage();
-        dynamic.input().shouldHave(attribute("disabled"));
-        dynamic.enabledBtn().shouldBe(visible).click();
-        dynamic.input().shouldNotHave(attribute("disabled")).setValue("text123");
-        dynamic.enabledBtn().shouldNotBe(visible);
-        dynamic.disabledBtn().shouldBe(visible).click();
-        dynamic.input().shouldHave(attribute("disabled"));
-        dynamic.disabledBtn().shouldNotBe(visible);
-        sleep(5000);
+        DynamicControlPage.input.shouldHave(attribute("disabled"));
+        DynamicControlPage.enabledBtn.shouldBe(visible).click();
+        DynamicControlPage.input.shouldNotHave(attribute("disabled")).setValue("text123");
+        DynamicControlPage.enabledBtn.shouldNotBe(visible);
+        DynamicControlPage.disabledBtn.shouldBe(visible).click();
+        DynamicControlPage.input.shouldHave(attribute("disabled"));
+        DynamicControlPage.disabledBtn.shouldNotBe(visible);
+       // sleep(5000);
     }
 
     /**
@@ -237,9 +247,10 @@ public class Tests extends BaseTest{
         open("http://the-internet.herokuapp.com/entry_ad");
         EntryADPage adPage = new EntryADPage();
         adPage.modalClose();
-        adPage.modalWindow().shouldNotBe(visible);
+        adPage.modalWindow.shouldNotBe(visible);
 
         sleep(3000);
     }
+
 
 }

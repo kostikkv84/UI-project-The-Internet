@@ -15,12 +15,9 @@ public class CheckboxesPage {
     public SelenideElement header () {
         return $x("//h3[contains(text(),\"Checkboxes\")]");
     }
-    public SelenideElement checkbox1 () {
-        return $x("//form[@id=\"checkboxes\"]//input[1]");
-    }
-    public SelenideElement checkbox2 () {
-        return $x("//form[@id=\"checkboxes\"]//input[2]");
-    }
+    public SelenideElement checkbox1 = $x("//form[@id=\"checkboxes\"]//input[1]");
+
+    public SelenideElement checkbox2 = $x("//form[@id=\"checkboxes\"]//input[2]");
 
     public void checkboxesClick(){
         for(SelenideElement element: $$("#checkboxes input")){
