@@ -14,9 +14,8 @@ public class DragNDropPage {
     public SelenideElement elemB () {
         return $("#column-b");
     }
-    public SelenideElement elemHeader () {
-        return $x("//div[@id=\"column-a\"]//header");
-    }
+    public SelenideElement elemHeader= $x("//div[@id=\"column-a\"]//header");
+
 
     public DragNDropPage dragNDropActions(){
         elemA().shouldBe(Condition.visible).dragAndDropTo(elemB());

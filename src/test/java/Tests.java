@@ -157,9 +157,9 @@ public class Tests extends BaseTest{
     public void dragNDropTest(){
         setUp("win_firefox");
         new MainPage(BASE_URL).dragNDropLinkOpen()
-                .dragNDropActions()
-                .elemHeader()
-                .getText().equals("B");
+                .dragNDropActions();
+        Assert.assertEquals(new DragNDropPage().elemHeader.getText(), "B");
+
     }
 
     /**
@@ -324,10 +324,9 @@ public class Tests extends BaseTest{
     public void floatingMenuTest(){
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/floating_menu");
-        actions().scrollToElement(FloatingMenuPage.footer).build();
+        actions().scrollToElement(FloatingMenuPage.footer);
         FloatingMenuPage.footer.shouldBe(visible);
         FloatingMenuPage.menu.shouldBe(visible);
-
     }
 
 }
