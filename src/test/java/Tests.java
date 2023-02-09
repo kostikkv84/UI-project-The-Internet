@@ -5,6 +5,10 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import static Constants.Constant.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -241,6 +245,9 @@ public class Tests extends BaseTest{
         dynamicPage.startButton().shouldNotBe(visible);
     }
 
+    /**
+     * Закрываем всплывающий див при открытии старницы сайта
+     */
     @Test
     public void closeModalTest(){
         setUp("win_firefox");
@@ -248,8 +255,50 @@ public class Tests extends BaseTest{
         EntryADPage adPage = new EntryADPage();
         adPage.modalClose();
         adPage.modalWindow.shouldNotBe(visible);
+        sleep(1000);
+    }
 
-        sleep(3000);
+    // !!!! доделать вывод курсора за пределы окна
+    @Test
+    public void modalIfCursorOutWindow() {
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/exit_intent");
+        ExitIntentPage.bodyPage.shouldBe(visible);
+        actions().moveByOffset(100,2000);
+        sleep(5000);
+    }
+    
+    @Test
+    public void downloadXMLTest () throws FileNotFoundException {
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/download");
+        File downloadedFile = DownloadPage.xmlFile.download(10000);
+    }
+
+    @Test
+    public void downloadPDFTest () throws FileNotFoundException {
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/download");
+        File downloadedFile = DownloadPage.pdfFile.download(10000);
+    }
+    @Test
+    public void downloadPNGTest () throws FileNotFoundException {
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/download");
+        File downloadedFile = DownloadPage.pngFile.download(10000);
+    }
+    @Test
+    public void downloadTXTTest () throws FileNotFoundException {
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/download");
+        File downloadedFile = DownloadPage.txtFile.download(10000);
+    }
+
+    @Test
+    public void fileUploadTest(){
+        setUp("win_firefox");
+        open("http://the-internet.herokuapp.com/upload");
+
     }
 
 

@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
 import dev.failsafe.internal.util.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -32,6 +33,8 @@ public class BaseTest {
         }
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 10000;
+        Configuration.fileDownload = FileDownloadMode.FOLDER; // настройка для загрузки файлов - download()
+   //     Configuration.downloadsFolder = ("E:\\");
         Configuration.driverManagerEnabled = true;
         Configuration.headless = false;
         Configuration.fastSetValue=true;
