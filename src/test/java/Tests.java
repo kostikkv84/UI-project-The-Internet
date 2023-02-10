@@ -324,10 +324,9 @@ public class Tests extends BaseTest{
     public void floatingMenuTest(){
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/floating_menu");
-        FloatingMenuPage floatingMenu = new FloatingMenuPage();
-        actions().scrollToElement(floatingMenu.footer);
-        floatingMenu.footer.shouldBe(visible);
-        floatingMenu.menu.shouldBe(visible);
+        actions().scrollToElement(FloatingPage.footer);
+        FloatingPage.footer.shouldBe(visible);
+        FloatingPage.menu.shouldBe(visible);
     }
 
 }
