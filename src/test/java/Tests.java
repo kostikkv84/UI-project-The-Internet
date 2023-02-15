@@ -3,7 +3,9 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -324,9 +326,54 @@ public class Tests extends BaseTest{
     public void floatingMenuTest(){
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/floating_menu");
-        actions().scrollToElement(FloatingPage.footer);
-        FloatingPage.footer.shouldBe(visible);
+        FloatingPage.footer.scrollTo();
+        FloatingPage.footer.shouldBe(visible).click();
         FloatingPage.menu.shouldBe(visible);
     }
+
+    @Test
+    public void wrongLoginTest(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/login");
+        $("#username").setValue("login");
+        $("#password").setValue("pass");
+        $(".radius").click();
+        $("#flash").shouldBe(visible).shouldHave(text("Your username is invalid!"));
+        sleep(5000);
+    }
+
+    /**
+     * new file - фрейм очищается при создании нового файла.
+     */
+    @Test
+    public void iFramesNewFileTest(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/iframe");
+        IFramePage iFramePage = new IFramePage();
+        iFramePage.newFileBtn.click();
+        iFramePage.newFile.click();
+        switchTo().frame(iFramePage.iframe);
+        iFramePage.textArea.shouldNotHave(text("Your content goes here."));
+        sleep(3000);
+
+    }
+
+    /**
+     * ДОДЕЛАТЬ! Требуется изменить текст в Frame и проверить, отмену действия.
+     */
+    @Test
+    @Ignore
+    public void iFramesUndoTest(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/iframe");
+        IFramePage iFramePage = new IFramePage();
+        iFramePage.changeText();
+        sleep(3000);
+       /* iFramePage.newEditBtn.click();
+        iFramePage.newEditBtnUndo.click();
+        iFramePage.checkTextFrame();*/
+
+    }
+
 
 }
