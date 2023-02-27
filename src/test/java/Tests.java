@@ -421,7 +421,12 @@ public class Tests extends BaseTest{
     public void lettersPressedTest () {
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/key_presses");
-        KeyPressedPage.inputsLettersKeys();
+     //   KeysPressedPage.inputsLettersKeys();
+        String[] myStringArray = {"a", "b", "c", "d", "f"};
+        for (String keys: myStringArray) {
+            KeysPressedPage.inputField.sendKeys(keys);
+            KeysPressedPage.resultField.shouldHave(Condition.text("You entered: " + keys.toUpperCase()));
+        }
         sleep(5000);
     }
 
@@ -429,10 +434,10 @@ public class Tests extends BaseTest{
     public void keysPressedTest () {
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/key_presses");
-        KeyPressedPage.input.sendKeys(Keys.BACK_SPACE);
-        KeyPressedPage.result.shouldHave(Condition.text("You entered: BACK_SPACE"));
-        KeyPressedPage.input.sendKeys(Keys.ALT);
-        KeyPressedPage.result.shouldHave(Condition.text("You entered: ALT"));
+        KeysPressedPage.inputField.sendKeys(Keys.BACK_SPACE);
+        KeysPressedPage.resultField.shouldHave(Condition.text("You entered: BACK_SPACE"));
+        KeysPressedPage.inputField.sendKeys(Keys.ALT);
+        KeysPressedPage.resultField.shouldHave(Condition.text("You entered: ALT"));
 
     }
 
