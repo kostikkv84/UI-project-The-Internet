@@ -4,12 +4,14 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class IFramePage {
 
     public SelenideElement iframe = $x("//iframe");
+    public SelenideElement textArea = $x("//p");
     public SelenideElement newFileBtn = $x("//button[@role=\"menuitem\"]//span[1]");
     public SelenideElement newFile = $x("//div[@class=\"tox-collection__item-label\"]");
 
@@ -19,7 +21,7 @@ public class IFramePage {
     public SelenideElement newViewBtn = $x("//button[@role=\"menuitem\"]//span[3]");
     public SelenideElement newFormatBtn = $x("//button[@role=\"menuitem\"]//span[4]");
 
-    public SelenideElement textArea = $x("//*[@id=\"tinymce\"]/p");
+
 
     public void clearFrame(){
         switchTo().frame(iframe);
@@ -30,10 +32,9 @@ public class IFramePage {
     public void changeTextFrame(){
         switchTo().frame(iframe);
         textArea.clear();
-        executeJavaScript("document.getElementByXpath('//*[@id=\"tinymce\"]/p').textContent=\"New Text\"");
-        sleep(5000);
-        textArea.shouldNotHave(text("Your content goes here."));
-        switchTo().defaultContent();
+      //  executeJavaScript("document.getElementByXpath(\"//p\").textContent=\"New Text\"");
+
+       // switchTo().defaultContent();
     }
     public void checkTextFrame(){
         switchTo().frame(iframe);

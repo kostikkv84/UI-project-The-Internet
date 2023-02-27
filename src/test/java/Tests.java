@@ -3,6 +3,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -355,7 +356,6 @@ public class Tests extends BaseTest{
         switchTo().frame(iFramePage.iframe);
         iFramePage.textArea.shouldNotHave(text("Your content goes here."));
         sleep(3000);
-
     }
 
     /**
@@ -367,13 +367,81 @@ public class Tests extends BaseTest{
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/iframe");
         IFramePage iFramePage = new IFramePage();
-        iFramePage.changeText();
+        iFramePage.changeTextFrame();
+        iFramePage.textArea.shouldBe(empty);
         sleep(3000);
-       /* iFramePage.newEditBtn.click();
+        switchTo().defaultContent();
+        iFramePage.newEditBtn.click();
+
         iFramePage.newEditBtnUndo.click();
-        iFramePage.checkTextFrame();*/
+        iFramePage.textArea.shouldHave(text("Your content goes here."));
 
     }
 
+    /**
+     * Разобраться со всплывающим разрешением доступа к Геолокации в браузере
+     */
+    @Test
+    @Ignore
+    public void geoTest(){
+        setUp("win_chrome");
+        open("https://the-internet.herokuapp.com/geolocation");
+        GeolocationPage geo = new GeolocationPage();
+            geo.geoButton.click();
+        sleep(3000);
+        geo.latValue.shouldBe(exist);
+        geo.longValue.shouldHave(text("34."));
 
+    }
+
+    @Test
+    public void alertTest() {
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/javascript_alerts");
+        ScriptAlertsPage alertModal = new ScriptAlertsPage();
+        alertModal.alertBtn.click();
+        Alert alert = switchTo().alert();
+        String actual = alert.getText();
+        sleep(1000);
+        alert.dismiss();
+        alertModal.alertClickedMsg.shouldHave(text("You successfully clicked an alert"));
+        Assert.assertEquals(actual,"I am a JS Alert");
+
+    }
+
+    @Test
+    public void siblingTestCount (){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/large");
+        LargePage.listSibling.shouldHave(CollectionCondition.size(150));
+        System.out.println(LargePage.listSibling.size());
+    }
+
+    @Test
+    public void lettersPressedTest () {
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/key_presses");
+        KeyPressedPage.inputsLettersKeys();
+        sleep(5000);
+    }
+
+    @Test
+    public void keysPressedTest () {
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/key_presses");
+        KeyPressedPage.input.sendKeys(Keys.BACK_SPACE);
+        KeyPressedPage.result.shouldHave(Condition.text("You entered: BACK_SPACE"));
+        KeyPressedPage.input.sendKeys(Keys.ALT);
+        KeyPressedPage.result.shouldHave(Condition.text("You entered: ALT"));
+
+    }
+
+    @Test
+    public void sliderTest(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/horizontal_slider");
+        SliderPage.slideRight();
+        sleep(5000);
+
+    }
 }
