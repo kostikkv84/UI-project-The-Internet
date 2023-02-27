@@ -133,10 +133,9 @@ public class Tests extends BaseTest{
         mainPage.contextPageLinkOpen();
         ContextMenuPage contextMenuPage = new ContextMenuPage();
         contextMenuPage.contextElem().shouldBe(visible).contextClick();
-        switchTo().alert().getText().contains("switchTo().alert().getText()"); // проверка текста алерта
+        switchTo().alert().getText().contains("You selected a context menu"); // проверка текста алерта
         System.out.println(switchTo().alert().getText());
         switchTo().alert().accept(); // закрываем алерт
-        sleep(1000);
     }
 
     /**
@@ -232,7 +231,6 @@ public class Tests extends BaseTest{
      * Стартуем по кнопке, кнопка исчезает.
      * Дожидаемся завершения Loadingbar
      * Проверяем появление сообщения об успехе - "Hello World!"
-     * @throws InterruptedException
      */
     @Test
     public void dynamicLoadOneTest() throws InterruptedException {
@@ -421,12 +419,8 @@ public class Tests extends BaseTest{
     public void lettersPressedTest () {
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/key_presses");
-     //   KeysPressedPage.inputsLettersKeys();
-        String[] myStringArray = {"a", "b", "c", "d", "f"};
-        for (String keys: myStringArray) {
-            KeysPressedPage.inputField.sendKeys(keys);
-            KeysPressedPage.resultField.shouldHave(Condition.text("You entered: " + keys.toUpperCase()));
-        }
+        KeysPressedPage page = new KeysPressedPage();
+        page.inputsLettersKeys();
         sleep(5000);
     }
 
@@ -434,10 +428,11 @@ public class Tests extends BaseTest{
     public void keysPressedTest () {
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/key_presses");
-        KeysPressedPage.inputField.sendKeys(Keys.BACK_SPACE);
-        KeysPressedPage.resultField.shouldHave(Condition.text("You entered: BACK_SPACE"));
-        KeysPressedPage.inputField.sendKeys(Keys.ALT);
-        KeysPressedPage.resultField.shouldHave(Condition.text("You entered: ALT"));
+        KeysPressedPage page = new KeysPressedPage();
+        page.inputField.sendKeys(Keys.BACK_SPACE);
+        page.resultField.shouldHave(Condition.text("You entered: BACK_SPACE"));
+        page.inputField.sendKeys(Keys.ALT);
+        page.resultField.shouldHave(Condition.text("You entered: ALT"));
 
     }
 
