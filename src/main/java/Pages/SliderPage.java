@@ -1,15 +1,22 @@
 package Pages;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class SliderPage {
-    public static SelenideElement slider = $(".sliderContainer");
+    public static SelenideElement slider = $x("//input[@type=\"range\"]");
+    public static SelenideElement count = $("#range");
 
     public static void slideRight(){
-        actions().clickAndHold(slider).moveByOffset(1000, 0).perform();
-      //  actions().dragAndDropBy(slider, 100, 0).perform();
-
+        slider.click();
+        slider.sendKeys(Keys.ARROW_RIGHT);
+    }
+    public static void slideLeft(){
+        slider.click();
+        for(int i = 0; i<=3; i++) {
+            slider.sendKeys(Keys.ARROW_LEFT);
+        }
     }
 }

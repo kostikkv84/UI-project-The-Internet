@@ -436,12 +436,31 @@ public class Tests extends BaseTest{
 
     }
 
+    /**
+     * Слейдер, прокрутка стрелками. Тест
+     */
     @Test
     public void sliderTest(){
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/horizontal_slider");
         SliderPage.slideRight();
-        sleep(5000);
-
+        SliderPage.count.shouldHave(text("3"));
+        SliderPage.slideLeft();
+        SliderPage.count.shouldHave(text("0.5"));
+    }
+    /**
+     * Слейдер, прокрутка мышкой. Тест
+     */
+    @Test
+    public void sliderTestMouse(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/horizontal_slider");
+       // SliderPage.slider.click();
+        actions()
+                .moveToElement(SliderPage.slider)
+                .clickAndHold(SliderPage.slider)
+                .moveByOffset(40,1)
+                .release().perform();
+        SliderPage.count.shouldNotHave(text("2.5"));
     }
 }
