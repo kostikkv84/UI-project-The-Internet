@@ -421,19 +421,15 @@ public class Tests extends BaseTest{
         open("https://the-internet.herokuapp.com/key_presses");
         KeysPressedPage page = new KeysPressedPage();
         page.inputsLettersKeys();
-        sleep(5000);
     }
 
     @Test
     public void keysPressedTest () {
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/key_presses");
-        KeysPressedPage page = new KeysPressedPage();
-        page.inputField.sendKeys(Keys.BACK_SPACE);
-        page.resultField.shouldHave(Condition.text("You entered: BACK_SPACE"));
-        page.inputField.sendKeys(Keys.ALT);
-        page.resultField.shouldHave(Condition.text("You entered: ALT"));
-
+        KeysPressedPage page1 = new KeysPressedPage();
+        page1.altPressed();
+        sleep(5000);
     }
 
     /**
