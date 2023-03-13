@@ -459,4 +459,22 @@ public class Tests extends BaseTest{
                 .release().perform();
         SliderPage.count.shouldNotHave(text("2.5"));
     }
+    
+
+    /**
+     * Тест наведения курсора на элементы
+     */
+    @Test
+    public void hoverToElements(){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/hovers");
+            HoverPage.hover1();
+            HoverPage.name1.shouldBe(visible);
+            HoverPage.hover2();
+            HoverPage.name2.shouldBe(visible);
+            HoverPage.hover3();
+            HoverPage.name3.shouldBe(visible);
+
+    }
+
 }
