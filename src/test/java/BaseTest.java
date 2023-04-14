@@ -41,7 +41,7 @@ public class BaseTest {
         Configuration.timeout = 10000;
         Configuration.fileDownload = FileDownloadMode.FOLDER; // настройка для загрузки файлов - download()
         Configuration.driverManagerEnabled = true;
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.fastSetValue=true;
     }
 

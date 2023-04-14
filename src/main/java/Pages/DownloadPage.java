@@ -9,7 +9,7 @@ public class DownloadPage {
 
     public static SelenideElement xmlFile = $x("//a[text()=\"5mb script.xml\"]");
     public static SelenideElement pdfFile = $x("//a[text()=\"adhar card.pdf\"]");
-    public static SelenideElement pngFile = $x("//a[text()=\"sample.png\"]");
+    public static SelenideElement pngFile = $x("//a[text()=\"pw.png\"]");
     public static SelenideElement txtFile = $x("//a[text()=\"some-file.txt\"]");
 
 

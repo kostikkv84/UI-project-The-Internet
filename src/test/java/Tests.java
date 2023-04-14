@@ -286,7 +286,7 @@ public class Tests extends BaseTest{
     public void downloadPNGTest () throws FileNotFoundException {
         setUp("win_firefox");
         open("http://the-internet.herokuapp.com/download");
-        File downloadedFile = DownloadPage.pngFile.download(10000);
+        File downloadedFile = DownloadPage.pngFile.download(15000);
     }
     @Test
     public void downloadTXTTest () throws FileNotFoundException {
@@ -458,6 +458,7 @@ public class Tests extends BaseTest{
                 .moveByOffset(40,1)
                 .release().perform();
         SliderPage.count.shouldNotHave(text("2.5"));
+
     }
     
 
@@ -469,7 +470,9 @@ public class Tests extends BaseTest{
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/hovers");
             HoverPage.hover1();
+            sleep(5000);
             HoverPage.name1.shouldBe(visible);
+
             HoverPage.hover2();
             HoverPage.name2.shouldBe(visible);
             HoverPage.hover3();
