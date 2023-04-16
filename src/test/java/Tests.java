@@ -179,6 +179,9 @@ public class Tests extends BaseTest{
         dropDown.option1().shouldNotHave(attribute("selected"));
     }
 
+    /**
+     * По нажатию на кнопку текст и изображение меняется - Проверка изменения
+     */
     @Test
     public void changeContentTest(){
         setUp("win_firefox");
@@ -482,13 +485,17 @@ public class Tests extends BaseTest{
             HoverPage.name3.shouldBe(visible);
     }
 
+    /**
+     * Прокрутка вниз и подгрузка нового контента - тест
+     */
     @Test
     public void infiniteScrollTest () {
         setUp("win_firefox");
         InfiniteScroll infinite = new InfiniteScroll();
         infinite.h3.shouldBe(visible);
+        infinite.elem3.shouldNotBe(visible);
         infinite.scrollDown();
-        sleep(7000);
+        infinite.elem3.shouldBe(visible);
     }
 
 }
