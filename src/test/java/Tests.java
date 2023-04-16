@@ -187,6 +187,10 @@ public class Tests extends BaseTest{
         String image = dynamicContent.divImage().getAttribute("src");
         String getText = dynamicContent.divText().getText();
         dynamicContent.changeContent().click(); // нажимаем сменить контент
+        System.out.println(image);
+        System.out.println(getText);
+        System.out.println(dynamicContent.divImage().getAttribute("src"));
+        System.out.println(dynamicContent.divText().getText());
         Assert.assertNotEquals(dynamicContent.divImage().getAttribute("src"),image);
         Assert.assertNotEquals(dynamicContent.divText().getText(),getText);
         sleep(1000);
@@ -470,14 +474,21 @@ public class Tests extends BaseTest{
         setUp("win_firefox");
         open("https://the-internet.herokuapp.com/hovers");
             HoverPage.hover1();
-            sleep(5000);
+          //  sleep(5000);
             HoverPage.name1.shouldBe(visible);
-
             HoverPage.hover2();
             HoverPage.name2.shouldBe(visible);
             HoverPage.hover3();
             HoverPage.name3.shouldBe(visible);
+    }
 
+    @Test
+    public void infiniteScrollTest () {
+        setUp("win_firefox");
+        InfiniteScroll infinite = new InfiniteScroll();
+        infinite.h3.shouldBe(visible);
+        infinite.scrollDown();
+        sleep(7000);
     }
 
 }
