@@ -498,4 +498,14 @@ public class Tests extends BaseTest{
         infinite.elem3.shouldBe(visible);
     }
 
+    @Test
+    public void inputNumberOnlyTest (){
+        setUp("win_firefox");
+        open("https://the-internet.herokuapp.com/inputs");
+        $("input").sendKeys("123");
+        $("input").shouldHave(text("123"));
+
+        sleep(5000);
+    }
+
 }
