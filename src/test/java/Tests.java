@@ -264,7 +264,7 @@ public class Tests extends BaseTest{
         EntryADPage adPage = new EntryADPage();
         adPage.modalClose();
         adPage.modalWindow.shouldNotBe(visible);
-        sleep(1000);
+        sleep(1);
     }
 
     // !!!! доделать вывод курсора за пределы окна
