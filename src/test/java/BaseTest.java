@@ -21,7 +21,7 @@ public class BaseTest {
     public void setUp(String PLATFORM_AND_BROWSER) {
         switch (PLATFORM_AND_BROWSER) {
             case "win_firefox":
-                WebDriverManager.firefoxdriver().driverVersion("0.32.1").setup();
+                WebDriverManager.firefoxdriver().setup();
                 Configuration.browser = "firefox";
                 System.setProperty("firefoxprofile.dom.webnotifications.serviceworker.enabled", "false");
                 System.setProperty("firefoxprofile.dom.webnotifications.enabled", "false");
