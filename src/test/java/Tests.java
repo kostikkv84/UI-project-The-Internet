@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -499,13 +500,19 @@ public class Tests extends BaseTest{
     }
 
     @Test
-    public void inputNumberOnlyTest (){
+    public void inputNumberPlusTest (){
         setUp("win_firefox");
-        open("https://the-internet.herokuapp.com/inputs");
-        $("input").sendKeys("123");
-        $("input").shouldHave(text("123"));
-
-        sleep(5000);
+        Inputs inputsPage = new Inputs();
+        inputsPage.input.shouldHave(attribute("type","number"));
+        inputsPage.numberPlus();
+        Assert.assertEquals(inputsPage.input.getValue(),"6");
+    }
+    @Test
+    public void inputNumberMinusTest (){
+        setUp("win_firefox");
+        Inputs inputsPage = new Inputs();
+        inputsPage.numberMinus();
+        Assert.assertEquals(inputsPage.input.getValue(),"-8");
     }
 
 }
