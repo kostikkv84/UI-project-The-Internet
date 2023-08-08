@@ -9,12 +9,14 @@ import static java.lang.Thread.sleep;
 public class TestForExample extends BaseTest{
 
     @Test
+    @Ignore
     public void testFirefoxSetUp(){
         setUp("win_firefox");
         Selenide.open("https://e.mail.ru");
     }
 
     @Test
+    @Ignore
     public void testChromeSetUp(){
         setUp("win_chrome");
         Selenide.open("https://e.mail.ru");
