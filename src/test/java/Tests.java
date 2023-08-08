@@ -1,30 +1,30 @@
-import Pages.*;
+import The_Internet_Pages.*;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import static Constants.Constant.*;
+import static Constants.Constants.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class Tests extends BaseTest{
+
+    String browser = "win_firefox";
 
     /**
      * Проверка количества элементов на странице
      */
     @Test
     public void checkAvailableExamples(){
-        setUp("win_chrome");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.availableExamples().shouldHave(CollectionCondition.size(44));
     }
@@ -34,7 +34,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkLinkABTestControl () {
-        setUp("win_firefox");
+        setUp(browser);
         new MainPage(BASE_URL).abTestingLinkOpen()
                 .text.shouldHave(Condition.text("Also known as split testing. "));
     }
@@ -46,7 +46,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkAddDeleteElem() {
-        setUp("win_firefox");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.addRemoveLinkOpen();
         AddRemoveElements addRemoveElements = new AddRemoveElements();
@@ -63,7 +63,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void baseAuth(){
-        setUp("win_firefox");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.authPageLinkOpen().congratulations.shouldHave(Condition.text("Congratulations!"));
     }
@@ -74,7 +74,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void brokenImage(){
-        setUp("win_firefox");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.brokenImageLinkOpen();
         BrokenImagePage brokenImages = new BrokenImagePage();
@@ -88,7 +88,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void challengingDomExample1(){
-        setUp("win_firefox");
+        setUp(browser);
         new MainPage(BASE_URL).challengingDOMPageLinkOpen();
         for(int i=0; i<ChallengingDOMPage.buttons.size();i++){
             ChallengingDOMPage.buttons.get(i).click();
@@ -100,7 +100,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void challengingDomExample2(){
-        setUp("win_firefox");
+        setUp(browser);
         new MainPage(BASE_URL).challengingDOMPageLinkOpen();
         ChallengingDOMPage.bazClick.shouldBe(visible).click();
         ChallengingDOMPage.fooClick.shouldBe(visible).click();
@@ -113,7 +113,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void checkboxesTest() {
-        setUp("win_firefox");
+        setUp(browser);
         new MainPage(BASE_URL).checkboxesPageLinkOpen();
         CheckboxesPage checkboxesPage = new CheckboxesPage();
         checkboxesPage.checkboxesClick();
@@ -129,7 +129,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void context(){
-        setUp("win_firefox");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.contextPageLinkOpen();
         ContextMenuPage contextMenuPage = new ContextMenuPage();
@@ -144,7 +144,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void disapElementTest(){
-        setUp("win_firefox");
+        setUp(browser);
         MainPage mainPage = new MainPage(BASE_URL);
         mainPage.disappearingElem();
         DisapElemPage disapElempage = new DisapElemPage();
@@ -158,7 +158,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dragNDropTest(){
-        setUp("win_firefox");
+        setUp(browser);
         new MainPage(BASE_URL).dragNDropLinkOpen()
                 .dragNDropActions();
         Assert.assertEquals(new DragNDropPage().elemHeader.getText(), "B");
@@ -170,7 +170,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dropDownMenuTest(){
-        setUp("win_firefox");
+        setUp(browser);
         DropDownPage dropDown = new DropDownPage(DROPDOWN_URL);
         dropDown.dropDownHeader().shouldBe(visible);
         dropDown.selectOption(dropDown.option1());
@@ -185,7 +185,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void changeContentTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/dynamic_content");
         DynamicContentPage dynamicContent = new DynamicContentPage();
         String image = dynamicContent.divImage().getAttribute("src");
@@ -207,7 +207,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dynamicControlsDelAddText(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/dynamic_controls");
         DynamicControlPage dynamicPage = new DynamicControlPage();
         dynamicPage.checkbox().shouldBe(visible);
@@ -223,7 +223,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void enabledDisabledTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/dynamic_controls");
         DynamicControlPage.input.shouldHave(attribute("disabled"));
         DynamicControlPage.enabledBtn.shouldBe(visible).click();
@@ -242,7 +242,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void dynamicLoadOneTest() throws InterruptedException {
-        setUp("win_firefox");
+        setUp(browser);
         Configuration.timeout = 10000;
         open("http://the-internet.herokuapp.com/dynamic_loading/1");
         DynamicLoadPage dynamicPage = new DynamicLoadPage();
@@ -259,7 +259,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void closeModalTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/entry_ad");
         EntryADPage adPage = new EntryADPage();
         adPage.modalClose();
@@ -278,26 +278,26 @@ public class Tests extends BaseTest{
     
     @Test
     public void downloadXMLTest () throws FileNotFoundException {
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/download");
         File downloadedFile = DownloadPage.xmlFile.download(10000);
     }
 
     @Test
     public void downloadPDFTest () throws FileNotFoundException {
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/download");
         File downloadedFile = DownloadPage.pdfFile.download(10000);
     }
     @Test
     public void downloadPNGTest () throws FileNotFoundException {
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/download");
         File downloadedFile = DownloadPage.pngFile.download(15000);
     }
     @Test
     public void downloadTXTTest () throws FileNotFoundException {
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/download");
         File downloadedFile = DownloadPage.txtFile.download(10000);
     }
@@ -307,7 +307,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void fileUploadTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/upload");
         UploadFilePage.uploadInput.uploadFile(new File("uploadFile.jpg"));
         UploadFilePage.button.click();
@@ -319,7 +319,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void removeClassFromButton(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/upload");
         SCRIPTS_JS.removeClass();
         $("#file-submit").shouldNotHave(attribute("class", "button"));
@@ -330,7 +330,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void floatingMenuTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("http://the-internet.herokuapp.com/floating_menu");
         FloatingPage.footer.scrollTo();
         FloatingPage.footer.shouldBe(visible).click();
@@ -339,7 +339,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void wrongLoginTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/login");
         $("#username").setValue("login");
         $("#password").setValue("pass");
@@ -353,7 +353,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void iFramesNewFileTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/iframe");
         IFramePage iFramePage = new IFramePage();
         iFramePage.newFileBtn.click();
@@ -369,7 +369,7 @@ public class Tests extends BaseTest{
     @Test
     @Ignore
     public void iFramesUndoTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/iframe");
         IFramePage iFramePage = new IFramePage();
         iFramePage.changeTextFrame();
@@ -389,7 +389,7 @@ public class Tests extends BaseTest{
     @Test
     @Ignore
     public void geoTest(){
-        setUp("win_chrome");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/geolocation");
         GeolocationPage geo = new GeolocationPage();
             geo.geoButton.click();
@@ -401,7 +401,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void alertTest() {
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/javascript_alerts");
         ScriptAlertsPage alertModal = new ScriptAlertsPage();
         alertModal.alertBtn.click();
@@ -416,7 +416,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void siblingTestCount (){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/large");
         LargePage.listSibling.shouldHave(CollectionCondition.size(150));
         System.out.println(LargePage.listSibling.size());
@@ -432,7 +432,7 @@ public class Tests extends BaseTest{
 
     @Test
     public void keysPressedTest () {
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/key_presses");
         KeysPressedPage page1 = new KeysPressedPage();
         page1.altPressed();
@@ -444,7 +444,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void sliderTest(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/horizontal_slider");
         SliderPage.slideRight();
         SliderPage.count.shouldHave(text("3"));
@@ -456,7 +456,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void sliderTestMouse(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/horizontal_slider");
        // SliderPage.slider.click();
         actions()
@@ -474,7 +474,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void hoverToElements(){
-        setUp("win_firefox");
+        setUp(browser);
         open("https://the-internet.herokuapp.com/hovers");
             HoverPage.hover1();
           //  sleep(5000);
@@ -490,7 +490,7 @@ public class Tests extends BaseTest{
      */
     @Test
     public void infiniteScrollTest () {
-        setUp("win_firefox");
+        setUp(browser);
         InfiniteScroll infinite = new InfiniteScroll();
         infinite.h3.shouldBe(visible);
         infinite.elem3.shouldNotBe(visible);
@@ -508,11 +508,10 @@ public class Tests extends BaseTest{
     }
     @Test
     public void inputNumberMinusTest (){
-        setUp("win_firefox");
+        setUp(browser);
         Inputs inputsPage = new Inputs();
         inputsPage.numberMinus();
         Assert.assertEquals(inputsPage.input.getValue(),"-8");
     }
-
 
 }
