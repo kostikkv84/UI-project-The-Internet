@@ -15,21 +15,6 @@ public class TestForExample extends BaseTest{
         Selenide.open("https://e.mail.ru");
     }
 
-    @Test
-    @Ignore
-    public void testChromeSetUp(){
-        setUp("win_chrome");
-        Selenide.open("https://e.mail.ru");
-        Selenide.closeWebDriver();
-    }
 
-
-    @Test (invocationCount=200)
-    @Ignore
-    public void openDebugSletat (){
-        setUp("win_chrome");
-        Sletat sletat = new Sletat();
-        Assert.assertTrue(sletat.logoIsVisible());
-    }
 
 }

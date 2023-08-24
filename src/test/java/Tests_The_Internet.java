@@ -15,7 +15,7 @@ import static Constants.Constants.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class Tests extends BaseTest{
+public class Tests_The_Internet extends BaseTest{
 
     String browser = "win_firefox";
 

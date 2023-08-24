@@ -22,9 +22,12 @@ public class YaTests extends BaseTest{
         Selenide.open("http://keycloak-dev.lan/auth/admin");
 
         $("#root").shouldBe(Condition.visible);
+                 /**
+         * ПОлучаем Cookie И записываем в переменную.
+         */
         String crsfToken = WebDriverRunner.getWebDriver().manage().getCookieNamed("KC_RESTART").getValue();
         System.out.println(crsfToken);
-
+            // Отправляем запрос, записываем куки авторизации
        String sessionID = given()
                 .contentType(ContentType.MULTIPART)
                 .cookie("KC_RESTART", crsfToken)
@@ -41,12 +44,12 @@ public class YaTests extends BaseTest{
 
         System.out.println(sessionID);
        Date expDate = new Date();
-       expDate.setTime(expDate.getTime()+(1000*1000));
+       expDate.setTime(expDate.getTime()+(1000*1000)); // сдвигаем срок действия куки
 
         Cookie cookie = new Cookie("AUTH_SESSION_ID_LEGACY", sessionID, "keycloak-dev.lan", "/auth/realms/master/", expDate);
         System.out.println(cookie);
         WebDriverRunner.getWebDriver().manage().addCookie(cookie);
-        Selenide.refresh();
+        Selenide.refresh(); // перегружаем страницу
         open("http://keycloak-dev.lan/auth/admin/master/console/#/realms");
         sleep(5000);
     }

@@ -70,6 +70,10 @@ public class BaseTest {
                 System.setProperty("firefoxprofile.geo.enabled", "true");
                 break;
             case "win_chrome":
+            //    Configuration.driverManagerEnabled = true;
+                /**
+                 * При получении ошибки 500 на версию chrome - обновляем WebDriverManager в Pom.xml
+                 */
                 WebDriverManager.chromedriver().setup();
                 //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
                 Configuration.browser = "chrome";
@@ -88,7 +92,7 @@ public class BaseTest {
         Configuration.fastSetValue=true;
     }
 
-
+//
     @AfterTest
     public void tearDown() {
         Selenide.closeWebDriver();
@@ -107,4 +111,7 @@ public class BaseTest {
             Thread.currentThread().interrupt();
         }
     }
+
+    //-----------------------------------------------
+    String mouseOverURL = "http://uitestingplayground.com/mouseover";
 }
